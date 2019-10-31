@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<h1 th:text="${title}"></h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post">
+    <br>
+    <label>Cheese to  Remove</label>
+<!--    Dropdown menu -->
+<!--    <select name="cheese">-->
+<!--        <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}"></option>-->
+<!--    </select>-->
+    <div th:each="cheese : ${cheeses}">
+        <input type = "checkbox" name = "cheese" th:value="${cheese.key}" th:text="${cheese.key + ': ' + cheese.value}">
+        <br>
+    </div>
+    <br>
+    <input type="submit" value="Remove Cheese" />
+
+<!--    <li th:each="cheese: ${cheeses}" th:text="${cheese.key + ': ' + cheese.value}"></li>-->
+
+<!--    <form action="#" th:action="@{/processForm}" th:object="${foo}" method="post">-->
+<!--        <div th:each="item : ${allItems}">-->
+<!--            <input type="checkbox" th:field="*{checkedItems}" th:value="${item}" />-->
+<!--            <label th:text="${item}">example</label>-->
+<!--        </div>-->
+<!--        <input type="submit" />-->
+<!--    </form>-->
+
+</form>
+</body>
+</html>
