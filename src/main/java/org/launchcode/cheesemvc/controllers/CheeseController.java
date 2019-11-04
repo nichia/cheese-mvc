@@ -6,11 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.management.VMOptionCompositeData;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 @Controller
 @RequestMapping("cheese")
@@ -63,10 +61,10 @@ public class CheeseController {
     //Dropdown menu - select element
     //public String processRemoveCheeseForm(@RequestParam String cheese) {
             //cheeses.remove(cheese);
-    public String processRemoveCheeseForm(@RequestParam String[] cheese) {
+    public String processRemoveCheeseForm(@RequestParam ArrayList<String> cheese) {
         for (String aCheese : cheese){
             Cheese.removeCheese(aCheese);
-            // cheeses.remove(aCheese);
+//             cheeses.remove(aCheese);
         }
 
         // Redirect to /cheese
