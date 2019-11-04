@@ -1,13 +1,11 @@
 package org.launchcode.cheesemvc.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("cheese")
@@ -73,4 +71,21 @@ public class CheeseController {
         // Redirect to /cheese
         return "redirect:";
     }
+
+    @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int cheeseId) {
+        model.addAttribute("cheese", CheeseData.getById(cheeseId));
+        model.addAttribute("title", "Edit Cheese");
+
+        return "cheese/edit";
+    }
+
+    @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.POST)
+    public String processEditForm(@ModelAttribute Cheese newCheese) {
+
+        CheeseData.update(newCheese);
+
+        return "redirect:/cheese";
+    }
+
 }

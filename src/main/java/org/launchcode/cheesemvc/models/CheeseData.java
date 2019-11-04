@@ -21,8 +21,15 @@ public class CheeseData {
         cheeses.remove(cheeseToRemove);
     }
 
+    // update
+    public static void update(Cheese newCheese) {
+        Cheese cheeseToEdit = getById(newCheese.getCheeseId());
+        cheeseToEdit.setName(newCheese.getName());
+        cheeseToEdit.setDescription(newCheese.getDescription());
+    }
+
     // getById
-    private static Cheese getById(int id) {
+    public static Cheese getById(int id) {
         Cheese theCheese = null;
         for (Cheese candidateCheese : cheeses) {
             if (candidateCheese.getCheeseId() == id)  {
