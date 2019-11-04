@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+<h1 th:text="${title}">Default Title</h1>
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label for="name-field">Username</label>
+        <input class="form-control" id="name-field" type="text" name="username" />
+    </div>
+    <div class="form-group">
+        <label for="email-field">Email</label>
+        <input class="form-control" id="email-field" type="email" name="email" />
+    </div>
+    <div class="form-group">
+        <label for="pswd-field">Password</label>
+        <input class="form-control" id="pswd-field" type="password" name="password" />
+    </div>
+    <input type="submit" value="Add User" />
+</form>
+</body>
+</html>
