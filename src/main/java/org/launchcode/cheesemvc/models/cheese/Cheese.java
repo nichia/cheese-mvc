@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models;
+package org.launchcode.cheesemvc.models.cheese;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

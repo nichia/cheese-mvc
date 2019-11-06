@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models;
+package org.launchcode.cheesemvc.models.cheese;
 
 import java.util.ArrayList;
 

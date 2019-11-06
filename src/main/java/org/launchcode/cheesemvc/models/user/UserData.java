@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models;
+package org.launchcode.cheesemvc.models.user;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,6 @@ public class UserData {
         userToEdit.setUsername(newUser.getUsername());
         userToEdit.setEmail(newUser.getEmail());
         userToEdit.setPassword(newUser.getPassword());
-
     }
 
     // getById

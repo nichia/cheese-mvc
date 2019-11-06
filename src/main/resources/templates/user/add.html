@@ -4,18 +4,28 @@
 <body class="container body-content">
 <h1 th:text="${title}">Default Title</h1>
 
-<form method="post" style="max-width:600px;">
+<nav th:replace="fragments :: user_navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${user}">
     <div class="form-group">
-        <label for="name-field">Username</label>
-        <input class="form-control" id="name-field" type="text" name="username" />
+        <label th:for="username">Username</label>
+        <input class="form-control" th:field="*{username}" />
+        <span th:errors="*{username}" class="error"></span>
     </div>
     <div class="form-group">
-        <label for="email-field">Email</label>
-        <input class="form-control" id="email-field" type="email" name="email" />
+        <label th:for="email-field">Email</label>
+        <input class="form-control" type="email" th:field="*{email}" />
+        <span th:errors="*{email}" class="error"></span>
     </div>
     <div class="form-group">
-        <label for="pswd-field">Password</label>
-        <input class="form-control" id="pswd-field" type="password" name="password" />
+        <label th:for="password">Password</label>
+        <input class="form-control" type="password" th:field="*{password}" />
+        <span th:errors="*{password}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label for="verify_password">Confirm Password</label>
+        <input class="form-control" type ="password" id="verify_password" name="verify_password" />
+        <span th:text="${password_error} ? ${password_error} : ''" class="error"></span>
     </div>
     <input type="submit" value="Add User" />
 </form>

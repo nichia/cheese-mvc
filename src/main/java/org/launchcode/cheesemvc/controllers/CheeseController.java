@@ -1,9 +1,8 @@
 package org.launchcode.cheesemvc.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.launchcode.cheesemvc.models.Cheese;
-import org.launchcode.cheesemvc.models.CheeseData;
-import org.launchcode.cheesemvc.models.CheeseType;
+import org.launchcode.cheesemvc.models.cheese.Cheese;
+import org.launchcode.cheesemvc.models.cheese.CheeseData;
+import org.launchcode.cheesemvc.models.cheese.CheeseType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

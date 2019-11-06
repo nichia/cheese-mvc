@@ -5,9 +5,9 @@
 <body class="container body-content">
 <h1 th:text="${title}">Default Title</h1>
 
-<p th:unless="${users} and ${users.size()}">no users :(</p>
+<nav th:replace="fragments :: user_navigation"></nav>
 
-<br />
+<p th:unless="${users} and ${users.size()}">no users :(</p>
 
 <table class="table">
     <tr>

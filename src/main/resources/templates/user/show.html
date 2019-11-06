@@ -3,6 +3,8 @@
 <body class="container body-content">
 <h1 th:text="${title}">Default Title</h1>
 
+<nav th:replace="fragments :: user_navigation"></nav>
+
 <div class="col-md-8 col-md-offset-2">
     <p th:text="'Username: ' + ${user.username}"></p>
     <p th:text="'Email: ' + ${user.email}"></p>
