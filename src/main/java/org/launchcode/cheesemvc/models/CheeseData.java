@@ -22,10 +22,12 @@ public class CheeseData {
     }
 
     // update
-    public static void update(Cheese newCheese) {
-        Cheese cheeseToEdit = getById(newCheese.getCheeseId());
-        cheeseToEdit.setName(newCheese.getName());
-        cheeseToEdit.setDescription(newCheese.getDescription());
+    public static void update(Cheese theCheese) {
+        Cheese cheeseToEdit = getById(theCheese.getCheeseId());
+        cheeseToEdit.setName(theCheese.getName());
+        cheeseToEdit.setDescription(theCheese.getDescription());
+        cheeseToEdit.setType(theCheese.getType());
+        cheeseToEdit.setRating(theCheese.getRating());
     }
 
     // getById
