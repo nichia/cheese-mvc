@@ -31,17 +31,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors, String verify_password, Model model) {
-        if(errors.hasErrors() || !(newUser.getPassword().equals(verify_password))) {
-            if (errors.hasFieldErrors("password")) {
-                newUser.setPassword("");
-            } else if (!(newUser.getPassword().equals(verify_password))) {
-                model.addAttribute("password_error", "Passwords do not match");
-            }
+//    public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors, String verify_password, Model model) {
+//        if(errors.hasErrors() || !(newUser.getPassword().equals(verify_password))) {
+//            if (errors.hasFieldErrors("password")) {
+//                newUser.setPassword("");
+//            } else if (!(newUser.getPassword().equals(verify_password))) {
+//                model.addAttribute("password_error", "Passwords do not match");
+//            }
+//            model.addAttribute("title", "Add User");
+//            return "user/add";
+//        }
+    public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
+        if (errors.hasErrors()) {
             model.addAttribute("title", "Add User");
             return "user/add";
         }
-
         UserData.add(newUser);
 
         // Redirect to /user

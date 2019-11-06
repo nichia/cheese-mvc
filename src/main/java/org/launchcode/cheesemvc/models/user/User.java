@@ -16,15 +16,20 @@ public class User {
     @NotNull
     @Size(min=6, message = "Password must be at least 6 characters long")
     private String password;
+
+    @NotNull(message = "Passwords do not match")
+    private String verifyPassword;
+
     private Date created;
     private int userId;
     private static int nextId = 1;
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String verifyPassword) {
         this();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.verifyPassword = verifyPassword;
         this.created = new Date();
     }
 
@@ -59,6 +64,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        this.checkPassword();
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
+        this.checkPassword();
+    }
+
+    private void checkPassword() {
+        if ((this.password != null) && (this.verifyPassword != null)) {
+            if (!(this.getPassword().equals(this.getVerifyPassword()))) {
+                this.verifyPassword = null;
+            }
+        }
     }
 
     public Date getCreated() {
