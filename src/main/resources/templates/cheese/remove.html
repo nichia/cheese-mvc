@@ -13,7 +13,7 @@
 <!--        <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}"></option>-->
 <!--    </select>-->
     <div th:each="cheese : ${cheeses}" class="checkbox">
-        <input type = "checkbox" name = "cheeseIds" th:value="${cheese.cheeseId}" th:id="${cheese.cheeseId}" />
+        <input type = "checkbox" name = "cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}" />
         <label th:for="${cheese.cheeseId}" th:text="${cheese.name + ': ' + cheese.description}"></label>
         <br />
     </div>

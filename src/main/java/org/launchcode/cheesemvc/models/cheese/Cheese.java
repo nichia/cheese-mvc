@@ -1,11 +1,21 @@
 package org.launchcode.cheesemvc.models.cheese;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Cheese {
+    @Id
+    @GeneratedValue
+    private int id;
+
     @NotNull
     @Size(min=3, max=25)
     private String name;
@@ -19,26 +29,16 @@ public class Cheese {
     @Min(value = 1, message = "Rating must be between 1 and 5")
     @Max(value = 5, message = "Rating must be between 1 and 5")
     private int rating;
-    private int cheeseId;
-    private static int nextId = 1;
 
-    public Cheese() {
-        cheeseId = nextId;
-        nextId++;
-    }
+    public Cheese() { }
 
     public Cheese(String name, String description) {
-        this();
         this.name = name;
         this.description = description;
     }
 
-    public int getCheeseId() {
-        return cheeseId;
-    }
-
-    public void setCheeseId(int cheeseId) {
-        this.cheeseId = cheeseId;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
