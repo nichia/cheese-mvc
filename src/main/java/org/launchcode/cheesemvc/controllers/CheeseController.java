@@ -104,7 +104,14 @@ public class CheeseController {
             return "cheese/edit";
         }
 
-        cheeseDao.save(theCheese);
+        // Update an instance of cheese
+        Cheese cheeseInDB = cheeseDao.findById(id).get();
+        cheeseInDB.setName(theCheese.getName());
+        cheeseInDB.setDescription(theCheese.getDescription());
+        cheeseInDB.setType(theCheese.getType());
+        cheeseInDB.setRating(theCheese.getRating());
+
+        cheeseDao.save(cheeseInDB);
 
         return "redirect:/cheese";
     }
