@@ -8,11 +8,7 @@
 
 <form method="post" style="max-width:600px;" th:object="${cheese}">
     <input type="hidden" th:field="*{id}" />
-<!--    <div class="form-group">-->
-<!--        <label th:for="id">ID</label>-->
-<!--        <input class="form-control" type="number" th:field="*{id}" />-->
-<!--        <span th:errors="*{id}" class="error"></span>-->
-<!--    </div>-->
+
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
@@ -34,6 +30,7 @@
         <input class="form-control" type="number" th:field="*{rating}" />
         <span th:errors="*{rating}" class="error"></span>
     </div>
+
     <input type="submit" value="Update Cheese" />
 </form>
 </body>

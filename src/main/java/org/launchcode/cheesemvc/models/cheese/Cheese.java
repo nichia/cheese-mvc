@@ -30,12 +30,12 @@ public class Cheese {
     @Max(value = 5, message = "Rating must be between 1 and 5")
     private int rating;
 
-    public Cheese() { }
-
     public Cheese(String name, String description) {
         this.name = name;
         this.description = description;
     }
+
+    public Cheese() { }
 
     public int getId() {
         return id;
