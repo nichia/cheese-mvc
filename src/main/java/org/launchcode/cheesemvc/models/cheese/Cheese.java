@@ -44,6 +44,11 @@ public class Cheese {
         return id;
     }
 
+    // Need this to enable edit view to pass back the id
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

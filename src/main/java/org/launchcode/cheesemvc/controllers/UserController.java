@@ -36,12 +36,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
+    public String processAddUserForm(@ModelAttribute @Valid User user, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add User");
             return "user/add";
         }
-        userDao.save(newUser);
+        userDao.save(user);
 
         // Redirect to /user
         return "redirect:";

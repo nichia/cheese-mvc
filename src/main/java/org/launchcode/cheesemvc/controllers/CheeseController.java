@@ -45,16 +45,16 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute @Valid Cheese newCheese, Errors errors, @RequestParam int categoryId, Model model) {
+    public String processAddCheeseForm(@ModelAttribute @Valid Cheese cheese, Errors errors, @RequestParam int categoryId, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
 
-        Category cate = categoryDao.findById(categoryId).get();
-        newCheese.setCategory(cate);
-        cheeseDao.save(newCheese);
+        Category category = categoryDao.findById(categoryId).get();
+        cheese.setCategory(category);
+        cheeseDao.save(cheese);
 
         // Redirect to /cheese
         return "redirect:";
@@ -94,7 +94,7 @@ public class CheeseController {
     }
 
     @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.POST)
-    public String processEditForm(@ModelAttribute @Valid Cheese theCheese, Errors errors, Model model, @RequestParam int id, @RequestParam int categoryId) {
+    public String processEditForm(@ModelAttribute @Valid Cheese cheese, Errors errors, Model model, @RequestParam int id, @RequestParam Category category) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Cheese");
@@ -103,13 +103,14 @@ public class CheeseController {
         }
 
         // Update an instance of cheese
-        Cheese cheeseInDB = cheeseDao.findById(id).get();
-        cheeseInDB.setName(theCheese.getName());
-        cheeseInDB.setDescription(theCheese.getDescription());
-        cheeseInDB.setRating(theCheese.getRating());
-        Category cate = categoryDao.findById(categoryId).get();
-        cheeseInDB.setCategory(cate);
-        cheeseDao.save(cheeseInDB);
+        Cheese theCheese = cheeseDao.findById(id).get();
+        theCheese.setName(cheese.getName());
+        theCheese.setDescription(cheese.getDescription());
+        theCheese.setRating(cheese.getRating());
+        Category cate = categoryDao.findById(category.getId()).get();
+        theCheese.setCategory(cate);
+
+        cheeseDao.save(theCheese);
 
         return "redirect:/cheese";
     }
