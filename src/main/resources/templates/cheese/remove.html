@@ -6,12 +6,9 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<br />
 <form method="post">
     <label>Cheese to Remove</label>
-<!--    Dropdown menu -->
-<!--    <select name="cheese">-->
-<!--        <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}"></option>-->
-<!--    </select>-->
     <div th:each="cheese : ${cheeses}" class="checkbox">
         <input type = "checkbox" name = "cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}" />
         <label th:for="${cheese.id}" th:text="${cheese.name + ': ' + cheese.description}"></label>
@@ -19,8 +16,6 @@
     </div>
     <br>
     <input type="submit" value="Remove Cheese" />
-
-<!--    <li th:each="cheese: ${cheeses}" th:text="${cheese.key + ': ' + cheese.value}"></li>-->
 </form>
 </body>
 </html>

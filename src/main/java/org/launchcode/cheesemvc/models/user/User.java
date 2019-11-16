@@ -1,11 +1,19 @@
 package org.launchcode.cheesemvc.models.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue
+    private int userId;
+
     @NotNull
     @Size(min=5, max=15, message = "Username must be between 5 and 15 characters")
     private String username;
@@ -21,11 +29,8 @@ public class User {
     private String verifyPassword;
 
     private Date created;
-    private int userId;
-    private static int nextId = 1;
 
     public User(String username, String email, String password, String verifyPassword) {
-        this();
         this.username = username;
         this.email = email;
         this.password = password;
@@ -34,8 +39,6 @@ public class User {
     }
 
     public User() {
-        userId = nextId;
-        nextId++;
     }
 
     public int getUserId() {
