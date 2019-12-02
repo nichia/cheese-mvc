@@ -37,3 +37,6 @@ bootRun {
 test {
 	useJUnitPlatform()
 }
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
