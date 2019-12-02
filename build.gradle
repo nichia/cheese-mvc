@@ -40,3 +40,11 @@ test {
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
+
+//to disable the test task during the execution of the stage task
+gradle.taskGraph.whenReady {
+	taskGraph ->
+		if (taskGraph.hasTask(stage)) {
+			test.enabled = false
+		}
+}
