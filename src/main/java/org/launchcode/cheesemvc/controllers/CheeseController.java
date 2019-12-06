@@ -17,16 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("cheese")
-public class CheeseController {
-
-    @Autowired
-    private CheeseDao cheeseDao;
-
-    @Autowired
-    private CategoryDao categoryDao;
-
-    @Autowired
-    private MenuDao menuDao;
+public class CheeseController extends AbstractController {
 
     // Request path: /cheese
     @RequestMapping(value = "")

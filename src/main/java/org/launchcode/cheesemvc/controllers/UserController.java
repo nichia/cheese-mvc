@@ -15,10 +15,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("user")
-public class UserController {
-
-    @Autowired
-    UserDao userDao;
+public class UserController  extends AbstractController {
 
     // Request path: /user
     @RequestMapping(value = "")
