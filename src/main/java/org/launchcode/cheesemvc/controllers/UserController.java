@@ -1,8 +1,6 @@
 package org.launchcode.cheesemvc.controllers;
 
-import org.launchcode.cheesemvc.models.user.User;
-import org.launchcode.cheesemvc.models.user.data.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.launchcode.cheesemvc.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

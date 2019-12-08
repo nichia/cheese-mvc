@@ -1,6 +1,6 @@
-package org.launchcode.cheesemvc.models.cheese.data;
+package org.launchcode.cheesemvc.models.data;
 
-import org.launchcode.cheesemvc.models.cheese.Menu;
+import org.launchcode.cheesemvc.models.Menu;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

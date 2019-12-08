@@ -1,4 +1,6 @@
-package org.launchcode.cheesemvc.models.cheese;
+package org.launchcode.cheesemvc.models;
+
+import org.launchcode.cheesemvc.models.Cheese;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

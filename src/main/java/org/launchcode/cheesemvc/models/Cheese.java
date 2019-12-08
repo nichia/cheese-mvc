@@ -1,6 +1,4 @@
-package org.launchcode.cheesemvc.models.cheese;
-
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+package org.launchcode.cheesemvc.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;

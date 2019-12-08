@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models.user;
+package org.launchcode.cheesemvc.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
