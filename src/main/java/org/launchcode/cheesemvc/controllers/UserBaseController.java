@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("userBase")
-public class UserController  extends AbstractController {
+public class UserBaseController extends AbstractController {
 
     // Request path: /user
     @RequestMapping(value = "")
