@@ -2,11 +2,10 @@ body {
     font-family: sans-serif;
 }
 
-/* li {
-    font-style: italic;
+nav {
+    margin-bottom: 20px;
 }
 
-a {
-    text-decoration: none;
+.user-nav {
+    float: right;
 }
-*/

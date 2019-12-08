@@ -8,7 +8,7 @@
 
 <br />
 <form method="post" style="max-width:600px;" th:object="${cheese}">
-    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{uid}" />
 
     <div class="form-group">
         <label th:for="name">Name</label>
@@ -24,9 +24,9 @@
         <label th:for="type">Category Type</label>
         <select name="category" th:value="*{category}">
             <option th:each="category : ${categories}"
-                    th:value="${category.id}"
+                    th:value="${category.uid}"
                     th:text="${category.name}"
-                    th:selected="${category.id == cheese.category.id}"></option>
+                    th:selected="${category.uid == cheese.category.uid}"></option>
         </select>
     </div>
     <div class="form-group">

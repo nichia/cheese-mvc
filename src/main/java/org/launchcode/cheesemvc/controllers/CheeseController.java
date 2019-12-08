@@ -3,11 +3,13 @@ package org.launchcode.cheesemvc.controllers;
 import org.launchcode.cheesemvc.models.Category;
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.Menu;
+import org.launchcode.cheesemvc.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class CheeseController extends AbstractController {
 
     // Request path: /cheese
     @RequestMapping(value = "")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
         return "cheese/index";
@@ -32,12 +34,17 @@ public class CheeseController extends AbstractController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute @Valid Cheese cheese, Errors errors, @RequestParam int categoryId, Model model) {
+    public String processAddCheeseForm(@ModelAttribute @Valid Cheese cheese,
+                                       Errors errors, @RequestParam int categoryId, Model model,
+                                       HttpServletRequest request) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
+
+        User owner = getUserFromSession(request.getSession());
+        cheese.setOwner(owner);
 
         Category category = categoryDao.findById(categoryId).get();
         cheese.setCategory(category);
@@ -49,21 +56,18 @@ public class CheeseController extends AbstractController {
 
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveCheeseForm(Model model){
-        // model.addAttribute("cheeses", cheeses);
-        model.addAttribute("cheeses", cheeseDao.findAll());
+    public String displayRemoveCheeseForm(Model model, HttpServletRequest request){
+        User user = getUserFromSession(request.getSession());
+
+        model.addAttribute("cheeses", cheeseDao.findByOwner(user));
         model.addAttribute("title", "Remove Cheese");
 
         return "cheese/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    //Dropdown menu - select element
-    //public String processRemoveCheeseForm(@RequestParam String cheese) {
-        //cheeses.remove(cheese);
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
         for (int cheeseId : cheeseIds){
-            // cheeses.remove(aCheese);
             cheeseDao.deleteById(cheeseId);
         }
 
@@ -72,7 +76,7 @@ public class CheeseController extends AbstractController {
     }
 
     @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.GET)
-    public String displayEditForm(Model model, @PathVariable int cheeseId) {
+    public String displayEditForm(Model model, @PathVariable int cheeseId, HttpServletRequest request) {
         model.addAttribute("cheese", cheeseDao.findById(cheeseId).orElse(null));
         model.addAttribute("title", "Edit Cheese");
         model.addAttribute("categories", categoryDao.findAll());
@@ -80,8 +84,8 @@ public class CheeseController extends AbstractController {
         return "cheese/edit";
     }
 
-    @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.POST)
-    public String processEditForm(@ModelAttribute @Valid Cheese cheese, Errors errors, Model model, @RequestParam int id, @RequestParam Category category) {
+    @RequestMapping(value="edit/{cheeseUid}", method = RequestMethod.POST)
+    public String processEditForm(@ModelAttribute @Valid Cheese cheese, Errors errors, Model model, @RequestParam int uid, @RequestParam Category category) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Cheese");
@@ -90,11 +94,11 @@ public class CheeseController extends AbstractController {
         }
 
         // Update an instance of cheese
-        Cheese theCheese = cheeseDao.findById(id).get();
+        Cheese theCheese = cheeseDao.findById(uid).get();
         theCheese.setName(cheese.getName());
         theCheese.setDescription(cheese.getDescription());
         theCheese.setRating(cheese.getRating());
-        Category cate = categoryDao.findById(category.getId()).get();
+        Category cate = categoryDao.findById(category.getUid()).get();
         theCheese.setCategory(cate);
 
         cheeseDao.save(theCheese);
@@ -103,8 +107,8 @@ public class CheeseController extends AbstractController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET)
-    public String category(Model model, @RequestParam int id) {
-        Category cate = categoryDao.findById(id).get();
+    public String category(Model model, @RequestParam int uid) {
+        Category cate = categoryDao.findById(uid).get();
         List<Cheese> cheeses = cate.getCheeses();
         model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "Cheeses in Category: " + cate.getName());
@@ -112,8 +116,8 @@ public class CheeseController extends AbstractController {
     }
 
     @RequestMapping(value = "menu", method = RequestMethod.GET)
-    public String menu(Model model, @RequestParam int id) {
-        Menu menuItem = menuDao.findById(id).get();
+    public String menu(Model model, @RequestParam int uid) {
+        Menu menuItem = menuDao.findById(uid).get();
         List<Cheese> cheeses = menuItem.getCheeses();
         model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "Cheeses in Menu: " + menuItem.getName());
