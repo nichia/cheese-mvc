@@ -1,10 +1,10 @@
 package org.launchcode.cheesemvc.controllers;
 
-import org.launchcode.cheesemvc.models.cheese.Cheese;
-import org.launchcode.cheesemvc.models.cheese.Menu;
-import org.launchcode.cheesemvc.models.cheese.data.CheeseDao;
-import org.launchcode.cheesemvc.models.cheese.data.MenuDao;
-import org.launchcode.cheesemvc.models.cheese.forms.AddMenuItemForm;
+import org.launchcode.cheesemvc.models.Cheese;
+import org.launchcode.cheesemvc.models.Menu;
+import org.launchcode.cheesemvc.models.data.CheeseDao;
+import org.launchcode.cheesemvc.models.data.MenuDao;
+import org.launchcode.cheesemvc.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("menu")
-public class MenuController {
+public class MenuController extends AbstractController {
 
     @Autowired
     private MenuDao menuDao;
@@ -54,7 +54,7 @@ public class MenuController {
         }
 
         menuDao.save(menu);
-        return "redirect:view/" + menu.getId();
+        return "redirect:view/" + menu.getUid();
     }
 
     @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
@@ -92,6 +92,6 @@ public class MenuController {
         theMenu.addItem(theCheese);
         menuDao.save(theMenu);
 
-        return "redirect:/menu/view/" + theMenu.getId();
+        return "redirect:/menu/view/" + theMenu.getUid();
     }
 }

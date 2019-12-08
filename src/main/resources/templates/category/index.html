@@ -12,7 +12,9 @@
 <i th:unless="${categories} and ${categories.size()}">No categories yet</i>
 
 <ul>
-    <li th:each="category : ${categories}"><a th:href="'/cheese/category?id=' + ${category.id}" th:text="${category.name}"></a></li>
+    <li th:each="category : ${categories}">
+        <a th:href="'/cheese/category?uid=' + ${category.uid}" th:text="${category.name}"></a>
+    </li>
 </ul>
 
 <br />

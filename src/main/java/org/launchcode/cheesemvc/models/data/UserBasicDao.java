@@ -1,11 +1,11 @@
-package org.launchcode.cheesemvc.models.cheese.data;
+package org.launchcode.cheesemvc.models.data;
 
-import org.launchcode.cheesemvc.models.cheese.Menu;
+import org.launchcode.cheesemvc.models.UserBasic;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface MenuDao extends CrudRepository<Menu, Integer> {
+public interface UserBasicDao extends CrudRepository<UserBasic, Integer> {
 }

@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models.cheese;
+package org.launchcode.cheesemvc.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,27 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Category {
-    @Id
-    @GeneratedValue
-    private int id;
-
+public class Category extends AbstractEntity {
     @NotNull
     @Size(min=3, max=25)
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_uid")
+
     private List<Cheese> cheeses = new ArrayList<>();
 
     public Category() {}
 
     public Category(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {

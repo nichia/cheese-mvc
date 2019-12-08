@@ -1,19 +1,18 @@
 package org.launchcode.cheesemvc.controllers;
 
-import org.launchcode.cheesemvc.models.cheese.Category;
-import org.launchcode.cheesemvc.models.cheese.Cheese;
-import org.launchcode.cheesemvc.models.cheese.Menu;
-import org.launchcode.cheesemvc.models.cheese.data.CategoryDao;
-import org.launchcode.cheesemvc.models.cheese.data.CheeseDao;
-import org.launchcode.cheesemvc.models.cheese.data.MenuDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.launchcode.cheesemvc.models.Category;
+import org.launchcode.cheesemvc.models.Cheese;
+import org.launchcode.cheesemvc.models.Menu;
+import org.launchcode.cheesemvc.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("cheese")
@@ -21,8 +20,9 @@ public class CheeseController extends AbstractController {
 
     // Request path: /cheese
     @RequestMapping(value = "")
-    public String index(Model model) {
-        model.addAttribute("cheeses", cheeseDao.findAll());
+    public String index(Model model, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
+        model.addAttribute("cheeses", cheeseDao.findByOwner(user));
         model.addAttribute("title", "My Cheeses");
         return "cheese/index";
     }
@@ -36,12 +36,17 @@ public class CheeseController extends AbstractController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute @Valid Cheese cheese, Errors errors, @RequestParam int categoryId, Model model) {
+    public String processAddCheeseForm(@ModelAttribute @Valid Cheese cheese,
+                                       Errors errors, @RequestParam int categoryId, Model model,
+                                       HttpServletRequest request) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
+
+        User owner = getUserFromSession(request.getSession());
+        cheese.setOwner(owner);
 
         Category category = categoryDao.findById(categoryId).get();
         cheese.setCategory(category);
@@ -98,7 +103,7 @@ public class CheeseController extends AbstractController {
         theCheese.setName(cheese.getName());
         theCheese.setDescription(cheese.getDescription());
         theCheese.setRating(cheese.getRating());
-        Category cate = categoryDao.findById(category.getId()).get();
+        Category cate = categoryDao.findById(category.getUid()).get();
         theCheese.setCategory(cate);
 
         cheeseDao.save(theCheese);

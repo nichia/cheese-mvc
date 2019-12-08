@@ -1,4 +1,4 @@
-package org.launchcode.cheesemvc.models.user;
+package org.launchcode.cheesemvc.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class User {
+public class UserBasic {
     @Id
     @GeneratedValue
     private int userId;
@@ -30,7 +30,7 @@ public class User {
 
     private Date created;
 
-    public User(String username, String email, String password, String verifyPassword) {
+    public UserBasic(String username, String email, String password, String verifyPassword) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -38,7 +38,7 @@ public class User {
         this.created = new Date();
     }
 
-    public User() {
+    public UserBasic() {
     }
 
     public int getUserId() {

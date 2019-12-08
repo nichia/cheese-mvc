@@ -1,6 +1,4 @@
-package org.launchcode.cheesemvc.models.cheese;
-
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+package org.launchcode.cheesemvc.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -10,10 +8,9 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-public class Cheese {
-    @Id
-    @GeneratedValue
-    private int id;
+public class Cheese extends AbstractEntity {
+    @ManyToOne
+    private User owner;
 
     @NotNull
     @Size(min=3, max=25)
@@ -39,15 +36,6 @@ public class Cheese {
     }
 
     public Cheese() { }
-
-    public int getId() {
-        return id;
-    }
-
-    // Need this to enable edit view to pass back the id
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -79,5 +67,13 @@ public class Cheese {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

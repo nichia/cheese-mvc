@@ -1,7 +1,7 @@
-package org.launchcode.cheesemvc.models.cheese.forms;
+package org.launchcode.cheesemvc.models.forms;
 
-import org.launchcode.cheesemvc.models.cheese.Cheese;
-import org.launchcode.cheesemvc.models.cheese.Menu;
+import org.launchcode.cheesemvc.models.Cheese;
+import org.launchcode.cheesemvc.models.Menu;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

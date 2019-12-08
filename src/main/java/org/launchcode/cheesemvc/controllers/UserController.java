@@ -1,8 +1,6 @@
 package org.launchcode.cheesemvc.controllers;
 
-import org.launchcode.cheesemvc.models.user.User;
-import org.launchcode.cheesemvc.models.user.data.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.launchcode.cheesemvc.models.UserBasic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,24 +19,24 @@ public class UserController  extends AbstractController {
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "Users");
-        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("users", userBasicDao.findAll());
         return "user/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddUserForm(Model model) {
         model.addAttribute("title", "Add User");
-        model.addAttribute(new User());
+        model.addAttribute(new UserBasic());
         return "user/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddUserForm(@ModelAttribute @Valid User user, Errors errors, Model model) {
+    public String processAddUserForm(@ModelAttribute @Valid UserBasic user, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add User");
             return "user/add";
         }
-        userDao.save(user);
+        userBasicDao.save(user);
 
         // Redirect to /user
         return "redirect:";
@@ -46,7 +44,7 @@ public class UserController  extends AbstractController {
 
     @RequestMapping(value="{userId}", method = RequestMethod.GET)
     public String displayUserForm(Model model, @PathVariable int userId) {
-        model.addAttribute("user", userDao.findById(userId));
+        model.addAttribute("user", userBasicDao.findById(userId));
         model.addAttribute("title", "User");
         return "user/show";
     }
