@@ -17,10 +17,10 @@
 <!--        <th>Created</th>-->
     </tr>
 
-    <tr th:each="user : ${users}">
-        <td><a th:href="@{'/user/' + ${user.userId}}"  th:text="${user.username}"></a></td>
-<!--        <td th:text="${user.email}"></td>-->
-<!--        <td th:text="${user.created}"></td>-->
+    <tr th:each="userBase : ${users}">
+        <td><a th:href="@{'/userBase/' + ${userBase.userId}}"  th:text="${userBase.username}"></a></td>
+<!--        <td th:text="${userBase.email}"></td>-->
+<!--        <td th:text="${userBase.created}"></td>-->
     </tr>
 </table>
 </body>
