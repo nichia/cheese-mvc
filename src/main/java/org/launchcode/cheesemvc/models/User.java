@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
-public class User {
+public class User extends AbstractEntity{
     @NotNull
     @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_-]{4,11}", message = "Invalid username")
     private String username;
