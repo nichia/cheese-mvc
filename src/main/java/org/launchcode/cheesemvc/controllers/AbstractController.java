@@ -27,6 +27,7 @@ public class AbstractController {
 
     public static final String userSessionKey = "user_id";
 
+    @ModelAttribute("user")
     protected User getUserFromSession(HttpSession session) {
 
         Integer userId = (Integer) session.getAttribute(userSessionKey);
