@@ -10,33 +10,26 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private int id;
 
-    @NotNull(message="email is compulsory")
+    @NotNull(message="Email is compulsory")
     @Email(message = "Email is invalid")
-    @Column(name = "email")
     private String email;
 
-    @NotNull(message="first name is compulsory")
-    @Column(name = "first_name")
+    @NotNull(message="First name is compulsory")
     private String name;
 
-    @NotNull(message="last name is compulsory")
-    @Column(name = "last_name")
+    @NotNull(message="Last name is compulsory")
     private String lastname;
 
     @NotNull(message="Password is compulsory")
     @Length(min=5, message="Password should be at least 5 characters")
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "status")
     private String status;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -45,8 +38,7 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "owner_id")
-    private List<Cheese> cheeses;
-
+    private List<Cheese> cheeses = new ArrayList<>();
 
     // Default constructor required by JPA
     public User() {}

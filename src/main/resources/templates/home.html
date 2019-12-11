@@ -8,7 +8,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="'Welcome ' + ${user.email}">Welcome user</h1>
+<!--<h1 >Welcome user</h1>-->
+<h1 th:text="'Welcome ' + ${user.name} + ' ' + ${user.lastname}">Welcome user</h1>
 
 </body>
 </html>

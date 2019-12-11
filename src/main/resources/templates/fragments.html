@@ -13,6 +13,7 @@
 <div th:fragment="navigation">
     <div th:if="${user}">
         <nav class="user-nav">
+            <span th:text="${user.name}"></span> |
             <a href="/logout">Log Out</a>
         </nav>
 

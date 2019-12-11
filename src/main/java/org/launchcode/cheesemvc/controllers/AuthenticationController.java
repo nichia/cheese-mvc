@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-public class AuthenticationController extends AbstractController{
+public class AuthenticationController{
 
     @Autowired
     UserService userService;
@@ -54,13 +54,13 @@ public class AuthenticationController extends AbstractController{
         modelAndView.setViewName("register");
         return modelAndView;
     }
-
-    @RequestMapping(value = "home", method = RequestMethod.GET)
-    public ModelAndView home() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home"); // resources/template/home.html
-        return modelAndView;
-    }
+//
+//    @RequestMapping(value = "welcome", method = RequestMethod.GET)
+//    public ModelAndView welcome() {
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("welcome"); // resources/template/home.html
+//        return modelAndView;
+//    }
 
 }
