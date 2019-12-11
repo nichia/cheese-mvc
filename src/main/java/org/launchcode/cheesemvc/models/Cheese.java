@@ -13,6 +13,9 @@ public class Cheese {
     @GeneratedValue
     private int id;
 
+    @ManyToOne
+    private User owner;
+
     @NotNull
     @Size(min=3, max=25)
     private String name;
@@ -77,5 +80,13 @@ public class Cheese {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

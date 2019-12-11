@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("category")
-public class CategoryController  extends AbstractController {
+public class CategoryController extends AbstractController {
 
     // Request path: /category
     @RequestMapping(value = "", method = RequestMethod.GET)

@@ -18,13 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("menu")
-public class MenuController {
-
-    @Autowired
-    private MenuDao menuDao;
-
-    @Autowired
-    private CheeseDao cheeseDao;
+public class MenuController extends AbstractController {
 
     // Request path: /menu
     @RequestMapping(value = "")

@@ -3,6 +3,7 @@ package org.launchcode.cheesemvc.controllers;
 import org.launchcode.cheesemvc.models.Category;
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.Menu;
+import org.launchcode.cheesemvc.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,7 +19,7 @@ public class CheeseController extends AbstractController {
     // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("cheeses", cheeseDao.findByOwner(getUserFromSession()));
         model.addAttribute("title", "My Cheeses");
         return "cheese/index";
     }
@@ -38,6 +39,9 @@ public class CheeseController extends AbstractController {
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
+
+        User owner = getUserFromSession();
+        cheese.setOwner(owner);
 
         Category category = categoryDao.findById(categoryId).get();
         cheese.setCategory(category);
