@@ -54,13 +54,5 @@ public class AuthenticationController{
         modelAndView.setViewName("register");
         return modelAndView;
     }
-//
-//    @RequestMapping(value = "welcome", method = RequestMethod.GET)
-//    public ModelAndView welcome() {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("welcome"); // resources/template/home.html
-//        return modelAndView;
-//    }
 
 }
