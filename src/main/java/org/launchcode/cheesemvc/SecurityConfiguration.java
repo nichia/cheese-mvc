@@ -42,8 +42,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
+                // Login does not work on Heroku (email or password is invalid), so permitAll() for /cheese/**, /menu/** and /category/**
+                .antMatchers("/cheese/**").permitAll()
+                .antMatchers("/menu/**").permitAll()
                 .antMatchers("/category/**").permitAll()
-                .antMatchers("/menu/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
+//                .antMatchers("/menu/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
                 .anyRequest().authenticated()
                 .and()
                 // form login
