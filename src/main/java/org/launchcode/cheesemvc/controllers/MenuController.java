@@ -2,10 +2,7 @@ package org.launchcode.cheesemvc.controllers;
 
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.Menu;
-import org.launchcode.cheesemvc.models.data.CheeseDao;
-import org.launchcode.cheesemvc.models.data.MenuDao;
 import org.launchcode.cheesemvc.models.forms.AddMenuItemForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
